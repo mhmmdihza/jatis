@@ -4,13 +4,16 @@ import (
 	"database/sql"
 	"fmt"
 
+	"jatis/storage"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/viper"
 )
 
 func main() {
 	conf := LoadConfig()
-	DBInit(conf)
+	db := DBInit(conf)
+	storage.New(db)
 }
 
 func LoadConfig() *viper.Viper {
